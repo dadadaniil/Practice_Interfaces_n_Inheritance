@@ -24,7 +24,7 @@ public class Euro {
     }
 
     public boolean equals(Euro euros) {
-        return this.cents == euros.getCents();
+            return this.cents == euros.getCents();
     }
 
     public int compareTo(Euro euros) {
