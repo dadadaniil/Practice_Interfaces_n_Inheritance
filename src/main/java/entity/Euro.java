@@ -19,9 +19,11 @@ public class Euro {
     }
 
 
-    public String centsToEuros(int cents) {
-        return String.format("%d.%02d", cents / 100, cents % 100);
+    public String centsToEuros() {
+        return String.format("%d.%02d", this.cents / 100, this.cents % 100);
     }
+
+
 
     public boolean equals(Euro euros) {
             return this.cents == euros.getCents();
@@ -33,6 +35,6 @@ public class Euro {
 
     @Override
     public String toString() {
-        return centsToEuros(cents);
+        return centsToEuros();
     }
 }
