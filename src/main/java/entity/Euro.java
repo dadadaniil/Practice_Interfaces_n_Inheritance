@@ -1,10 +1,12 @@
 package entity;
 
-public class Euro {
+import java.util.Objects;
+
+public class Euro implements Comparable<Euro> {
     private int cents;
 
     public Euro(int cents) {
-        this.cents = Math.max(cents,0);
+        this.cents = Math.max(cents, 0);
     }
 
     public Euro() {
@@ -15,18 +17,12 @@ public class Euro {
     }
 
     public void setCents(int cents) {
-        this.cents = Math.max(cents,0);
+        this.cents = Math.max(cents, 0);
     }
 
 
     public String centsToEuros() {
         return String.format("%d.%02d", this.cents / 100, this.cents % 100);
-    }
-
-
-
-    public boolean equals(Euro euros) {
-            return this.cents == euros.getCents();
     }
 
     public int compareTo(Euro euros) {
@@ -36,5 +32,18 @@ public class Euro {
     @Override
     public String toString() {
         return centsToEuros();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Euro euro = (Euro) o;
+        return cents == euro.cents;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cents);
     }
 }

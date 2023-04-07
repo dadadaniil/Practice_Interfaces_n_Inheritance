@@ -1,6 +1,6 @@
 package entity;
 
-import java.util.Locale;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Purchase {
@@ -9,6 +9,7 @@ public class Purchase {
     private int numberOfPurchasedUnits;
 
     public Purchase() {
+        this.priceInEuro = new Euro();
     }
 
     public Purchase(String productName, Euro priceInEuro, int numberOfPurchasedUnits) {
@@ -18,14 +19,55 @@ public class Purchase {
     }
 
     public Purchase(Scanner scanner) {
-        scanner.useLocale(Locale.ENGLISH);
+        this.productName = scanner.next();
+        this.priceInEuro = new Euro(scanner.nextInt());
+        this.numberOfPurchasedUnits = scanner.nextInt();
+    }
 
-        var line = scanner.nextLine();
+    public String getProductName() {
+        return productName;
+    }
 
-        var values = line.split("\\s+");
+    public Euro getPriceInEuro() {
+        return priceInEuro;
+    }
 
-//        this.productName = Integer.parseString(values[0]);
-        var discountPercent = Integer.parseInt(values[1]);
-        var weekDay = Integer.parseInt(values[2]);
+
+    public int getNumberOfPurchasedUnits() {
+        return numberOfPurchasedUnits;
+    }
+
+    public void setNumberOfPurchasedUnits(int numberOfPurchasedUnits) {
+        this.numberOfPurchasedUnits = numberOfPurchasedUnits;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public void setPriceInEuro(Euro priceInEuro) {
+        this.priceInEuro = priceInEuro;
+    }
+
+    public Euro getCost() {
+        return new Euro(priceInEuro.getCents() * numberOfPurchasedUnits);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getName() + ";" + productName + ";" + priceInEuro + ";" + numberOfPurchasedUnits + ';' + this.getCost();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Purchase purchase = (Purchase) o;
+        return Objects.equals(productName, purchase.productName) && Objects.equals(priceInEuro, purchase.priceInEuro);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(productName, priceInEuro);
     }
 }
