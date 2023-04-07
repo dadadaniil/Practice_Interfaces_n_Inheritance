@@ -4,7 +4,7 @@ public class Euro {
     private int cents;
 
     public Euro(int cents) {
-        this.cents = cents;
+        this.cents = Math.max(cents,0);
     }
 
     public Euro() {
@@ -15,7 +15,7 @@ public class Euro {
     }
 
     public void setCents(int cents) {
-        this.cents = cents;
+        this.cents = Math.max(cents,0);
     }
 
 
