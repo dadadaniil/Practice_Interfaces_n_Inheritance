@@ -135,21 +135,14 @@ class TestRunner {
 
     @org.junit.jupiter.api.Test
     void PurchaseGetCost() {
-        Euro priceInEuro = new Euro(25);
+        Euro priceInEuro = new Euro(25);//redundant line for best readability
         Purchase purchase = new Purchase("Apple", priceInEuro, 12);
             Assertions.assertEquals(new Euro(300),purchase.getCost());
     }
 
     @org.junit.jupiter.api.Test
-    void Purchase() {
-        Euro priceInEuro = new Euro(25);
-        Purchase purchase = new Purchase("Apple", priceInEuro, 12);
-        Assertions.assertEquals(new Euro(300),purchase.getCost());
-    }
-
-    @org.junit.jupiter.api.Test
     void PurchaseIsEquals() {
-        Euro priceInEuro = new Euro(25);
+        Euro priceInEuro = new Euro(25);//redundant line for best readability
         Purchase purchase = new Purchase("Apple", priceInEuro, 12);
         Assertions.assertTrue(purchase.equals(purchase));
     }
