@@ -113,4 +113,10 @@ class TestRunner {
         euro.setCents(101);
         Assertions.assertEquals("1.01", euro.centsToEuros());
     }
+    @org.junit.jupiter.api.Test
+    void PurchaseConstructorTest() {
+        Purchase purchase= new Purchase("Apple",new Euro(25),12    );
+//        Assertions.assertEquals("Apple",purchase.);
+    }
+
 }
