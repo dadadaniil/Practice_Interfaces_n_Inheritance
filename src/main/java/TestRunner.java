@@ -1,4 +1,5 @@
 import entity.Euro;
+import entity.Purchase;
 import org.junit.jupiter.api.Assertions;
 
 class TestRunner {
@@ -53,21 +54,21 @@ class TestRunner {
     void testEqualsComparisonWithSmallerValue() {
         Euro euro = new Euro(270);
         Euro euroSecond = new Euro(100);
-        Assertions.assertFalse(euro.equals(euroSecond));
+        Assertions.assertNotEquals(euro, euroSecond);
     }
 
     @org.junit.jupiter.api.Test
     void testEqualsComparisonToZero() {
         Euro euro = new Euro(0);
         Euro euroSecond = new Euro(100);
-        Assertions.assertFalse(euro.equals(euroSecond));
+        Assertions.assertNotEquals(euro, euroSecond);
     }
 
     @org.junit.jupiter.api.Test
     void testEqualsComparisonWithZero() {
         Euro euro = new Euro(10);
         Euro euroSecond = new Euro(0);
-        Assertions.assertFalse(euro.equals(euroSecond));
+        Assertions.assertNotEquals(euro, euroSecond);
     }
 
     @org.junit.jupiter.api.Test
@@ -112,10 +113,45 @@ class TestRunner {
         euro.setCents(101);
         Assertions.assertEquals("1.01", euro.centsToEuros());
     }
+
     @org.junit.jupiter.api.Test
-    void PurchaseConstructorTest() {
-        Purchase purchase= new Purchase("Apple",new Euro(25),12    );
-//        Assertions.assertEquals("Apple",purchase.);
+    void PurchaseConstructorTestName() {
+        Purchase purchase = new Purchase("Apple", new Euro(25), 12);
+        Assertions.assertEquals("Apple", purchase.getProductName());
+    }
+
+    @org.junit.jupiter.api.Test
+    void PurchaseConstructorTestEuro() {
+        Euro priceInEuro = new Euro(25);
+        Purchase purchase = new Purchase("Apple", priceInEuro, 12);
+        Assertions.assertEquals(priceInEuro, purchase.getPriceInEuro());
+    }
+
+    @org.junit.jupiter.api.Test
+    void PurchaseConstructorTestNumber() {
+        Purchase purchase = new Purchase("Apple", new Euro(25), 12);
+        Assertions.assertEquals(12, purchase.getNumberOfPurchasedUnits());
+    }
+
+    @org.junit.jupiter.api.Test
+    void PurchaseGetCost() {
+        Euro priceInEuro = new Euro(25);
+        Purchase purchase = new Purchase("Apple", priceInEuro, 12);
+            Assertions.assertEquals(new Euro(300),purchase.getCost());
+    }
+
+    @org.junit.jupiter.api.Test
+    void Purchase() {
+        Euro priceInEuro = new Euro(25);
+        Purchase purchase = new Purchase("Apple", priceInEuro, 12);
+        Assertions.assertEquals(new Euro(300),purchase.getCost());
+    }
+
+    @org.junit.jupiter.api.Test
+    void PurchaseIsEquals() {
+        Euro priceInEuro = new Euro(25);
+        Purchase purchase = new Purchase("Apple", priceInEuro, 12);
+        Assertions.assertTrue(purchase.equals(purchase));
     }
 
 }
