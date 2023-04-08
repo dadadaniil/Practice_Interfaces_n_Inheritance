@@ -1,5 +1,4 @@
-package entity;
-
+import entity.Euro;
 import org.junit.jupiter.api.Assertions;
 
 class TestRunner {
@@ -51,21 +50,21 @@ class TestRunner {
 
 
     @org.junit.jupiter.api.Test
-    void testEqualsComparisingWithSmallerValue() {
+    void testEqualsComparisonWithSmallerValue() {
         Euro euro = new Euro(270);
         Euro euroSecond = new Euro(100);
         Assertions.assertFalse(euro.equals(euroSecond));
     }
 
     @org.junit.jupiter.api.Test
-    void testEqualsComparisingToZero() {
+    void testEqualsComparisonToZero() {
         Euro euro = new Euro(0);
         Euro euroSecond = new Euro(100);
         Assertions.assertFalse(euro.equals(euroSecond));
     }
 
     @org.junit.jupiter.api.Test
-    void testEqualsComparisingWithZero() {
+    void testEqualsComparisonWithZero() {
         Euro euro = new Euro(10);
         Euro euroSecond = new Euro(0);
         Assertions.assertFalse(euro.equals(euroSecond));
