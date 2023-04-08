@@ -1,4 +1,5 @@
-import entity.*;
+import entity.Purchase;
+import entity.PurchasesFactory;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -14,7 +15,7 @@ public class Runner {
         try {
             scanner = new Scanner(new FileReader("src/in.txt"));
 
-            for (int i = 0; i < purchases.length; i++) {
+            for (int i = 0; i < purchases.length - 1; i++) {
                 //2.
                 purchases[i] = PurchasesFactory.getPurchaseFromFactory(scanner);
                 //3.
@@ -32,8 +33,12 @@ public class Runner {
             System.out.println();
             System.out.println("The purchase with the most cost is " + purchaseWithMaxCost.toString());
             System.out.println();
-        System.out.println(allPurchasesAreEquals ? "All purchases are equal" : "Purchases aren't equal");
 
+            if (allPurchasesAreEquals) {
+                System.out.println("All purchases are equal");
+            } else {
+                System.out.println("Purchases aren't equal");
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
