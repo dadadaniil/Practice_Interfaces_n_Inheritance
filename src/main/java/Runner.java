@@ -32,11 +32,7 @@ public class Runner {
             System.out.println();
             System.out.println("The purchase with the most cost is " + purchaseWithMaxCost.toString());
             System.out.println();
-            if (allPurchasesAreEquals) {
-                System.out.println("All purchases are equal");
-            } else {
-                System.out.println("Purchases aren't equal");
-            }
+        System.out.println(allPurchasesAreEquals ? "All purchases are equal" : "Purchases aren't equal");
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
