@@ -26,7 +26,7 @@ public class ProportionalDiscountPurchase extends Purchase {
         if (getNumberOfPurchasedUnits() > controlNumberOfUnits) {
             return new Euro((int) (getPriceInEuro().getCents() * getNumberOfPurchasedUnits() * (100 - discount) / 100));
         }
-        return new Euro();
+        return super.getCost();
     }
 
     @Override
