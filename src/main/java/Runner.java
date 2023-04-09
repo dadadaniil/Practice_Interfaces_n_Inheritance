@@ -15,7 +15,7 @@ public class Runner {
         try {
             scanner = new Scanner(new FileReader("src/in.txt"));
 
-            for (int i = 0; i < purchases.length - 1; i++) {
+            for (int i = 0; i < purchases.length; i++) {
                 //2.
                 purchases[i] = PurchasesFactory.getPurchaseFromFactory(scanner);
                 //3.
