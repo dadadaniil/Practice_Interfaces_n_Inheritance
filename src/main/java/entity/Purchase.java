@@ -41,21 +41,21 @@ public class Purchase {
         this.numberOfPurchasedUnits = numberOfPurchasedUnits;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
     public void setPriceInEuro(Euro priceInEuro) {
         this.priceInEuro = priceInEuro;
     }
 
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
     public Euro getCost() {
-        return new Euro(priceInEuro.getCents() * numberOfPurchasedUnits);
+        return priceInEuro.multiplication(numberOfPurchasedUnits);
     }
 
     @Override
     public String toString() {
-        return getClass().getName() + ";" + productName + ";" + priceInEuro + ";" + numberOfPurchasedUnits + ';' + this.getCost();
+        return getClass().getSimpleName() + ";" + productName + ";" + priceInEuro + ";" + numberOfPurchasedUnits + ';' + this.getCost();
     }
 
     @Override

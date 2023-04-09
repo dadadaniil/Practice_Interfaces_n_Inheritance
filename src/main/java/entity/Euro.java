@@ -6,7 +6,7 @@ public class Euro implements Comparable<Euro> {
     private int cents;
 
     public Euro(int cents) {
-        this.cents = Math.max(cents, 0);
+        this.cents = cents;
     }
 
     public Euro() {
@@ -17,7 +17,7 @@ public class Euro implements Comparable<Euro> {
     }
 
     public void setCents(int cents) {
-        this.cents = Math.max(cents, 0);
+        this.cents = cents;
     }
 
 
@@ -47,12 +47,20 @@ public class Euro implements Comparable<Euro> {
         return Objects.hash(cents);
     }
 
-    public void substraction(int sumToSubstract) {
-        this.cents = Math.max(0, this.cents - Math.max(0, sumToSubstract));
+    public Euro subtraction(Euro sumToSubtract) {
+        return new Euro(cents - sumToSubtract.getCents());
     }
 
-    public void addition(int sumToAdd) {
-        this.cents = this.cents + Math.max(0, sumToAdd);
+    public Euro addition(Euro sumToAdd) {
+        return new Euro(cents + sumToAdd.getCents());
+    }
+
+    public Euro multiplication(int sumToMultiply) {
+        return new Euro(cents * sumToMultiply);
+    }
+
+    public Euro division(int sumToDivide) {
+        return new Euro(cents / sumToDivide);
     }
 
     public void zeroing() {

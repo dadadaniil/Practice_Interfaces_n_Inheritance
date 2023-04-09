@@ -1,8 +1,8 @@
-import entity.Purchase;
-import entity.PurchasesFactory;
+import entity.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Runner {
@@ -14,6 +14,7 @@ public class Runner {
         Scanner scanner;
         try {
             scanner = new Scanner(new FileReader("src/in.txt"));
+            scanner.useLocale(Locale.ENGLISH);
 
             for (int i = 0; i < purchases.length; i++) {
                 //2.
@@ -39,6 +40,7 @@ public class Runner {
             } else {
                 System.out.println("Purchases aren't equal");
             }
+            scanner.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
