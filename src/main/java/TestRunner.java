@@ -115,6 +115,41 @@ class TestRunner {
     }
 
     @org.junit.jupiter.api.Test
+    void substractionNegativeArgument() {
+        Euro euro = new Euro(10);
+        euro.substraction(-19);
+        Assertions.assertEquals(10, euro.getCents());
+    }
+
+    @org.junit.jupiter.api.Test
+    void substractionPositiveArgumentZeroing() {
+        Euro euro = new Euro(10);
+        euro.substraction(16);
+        Assertions.assertEquals(0, euro.getCents());
+    }
+
+    @org.junit.jupiter.api.Test
+    void substractionPositiveArgument() {
+        Euro euro = new Euro(10);
+        euro.substraction(5);
+        Assertions.assertEquals(5, euro.getCents());
+    }
+
+    @org.junit.jupiter.api.Test
+    void additionPositiveArgument() {
+        Euro euro = new Euro(10);
+        euro.addition(15);
+        Assertions.assertEquals(25, euro.getCents());
+    }
+
+    @org.junit.jupiter.api.Test
+    void additionNegativeArgument() {
+        Euro euro = new Euro(10);
+        euro.addition(-15);
+        Assertions.assertEquals(10, euro.getCents());
+    }
+
+    @org.junit.jupiter.api.Test
     void PurchaseConstructorTestName() {
         Purchase purchase = new Purchase("Apple", new Euro(25), 12);
         Assertions.assertEquals("Apple", purchase.getProductName());
@@ -137,7 +172,7 @@ class TestRunner {
     void PurchaseGetCost() {
         Euro priceInEuro = new Euro(25);//redundant line for best readability
         Purchase purchase = new Purchase("Apple", priceInEuro, 12);
-            Assertions.assertEquals(new Euro(300),purchase.getCost());
+        Assertions.assertEquals(new Euro(300), purchase.getCost());
     }
 
     @org.junit.jupiter.api.Test

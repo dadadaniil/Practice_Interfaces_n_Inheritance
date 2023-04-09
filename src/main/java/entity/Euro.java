@@ -46,4 +46,16 @@ public class Euro implements Comparable<Euro> {
     public int hashCode() {
         return Objects.hash(cents);
     }
+
+    public void substraction(int sumToSubstract) {
+        this.cents = Math.max(0, this.cents - Math.max(0, sumToSubstract));
+    }
+
+    public void addition(int sumToAdd) {
+        this.cents = this.cents + Math.max(0, sumToAdd);
+    }
+
+    public void zeroing() {
+        this.cents = 0;
+    }
 }
