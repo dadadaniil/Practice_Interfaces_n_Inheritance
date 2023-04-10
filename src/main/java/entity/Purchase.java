@@ -50,12 +50,16 @@ public class Purchase {
     }
 
     public Euro getCost() {
-        return priceInEuro.multiplication(numberOfPurchasedUnits);
+        priceInEuro.multiplication(numberOfPurchasedUnits);
+        return new Euro(priceInEuro);
+    }
+    protected String fieldsToString() {
+        return  getClass().getSimpleName() + ";" + productName + ";" + priceInEuro + ";" + numberOfPurchasedUnits;
     }
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + ";" + productName + ";" + priceInEuro + ";" + numberOfPurchasedUnits + ';' + this.getCost();
+        return fieldsToString() + ';' + this.getCost();
     }
 
     @Override

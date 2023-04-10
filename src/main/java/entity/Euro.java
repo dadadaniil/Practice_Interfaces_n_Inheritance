@@ -11,6 +11,12 @@ public class Euro implements Comparable<Euro> {
 
     public Euro() {
     }
+    public Euro(int euros, int cents){
+        this(euros * 100 + cents);
+    }
+    public Euro(Euro euro){
+        this(euro.getCents());
+    }
 
     public int getCents() {
         return cents;
@@ -47,20 +53,20 @@ public class Euro implements Comparable<Euro> {
         return Objects.hash(cents);
     }
 
-    public Euro subtraction(Euro sumToSubtract) {
-        return new Euro(cents - sumToSubtract.getCents());
+    public void subtraction(Euro sumToSubtract) {
+        setCents(cents - sumToSubtract.getCents());
     }
 
-    public Euro addition(Euro sumToAdd) {
-        return new Euro(cents + sumToAdd.getCents());
+    public void addition(Euro sumToAdd) {
+        setCents(cents + sumToAdd.getCents());
     }
 
-    public Euro multiplication(int sumToMultiply) {
-        return new Euro(cents * sumToMultiply);
+    public void multiplication(int sumToMultiply) {
+        setCents(cents * sumToMultiply);
     }
 
-    public Euro division(int sumToDivide) {
-        return new Euro(cents / sumToDivide);
+    public void division(int sumToDivide) {
+        setCents(cents / sumToDivide);
     }
 
     public void zeroing() {
