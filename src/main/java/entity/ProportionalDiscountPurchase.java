@@ -28,7 +28,7 @@ public class ProportionalDiscountPurchase extends Purchase {
     }
 
     @Override
-    public String toString() {
-        return fieldsToString() + ";" + discount + ";" + this.getCost();
+    protected String fieldsToString() {
+        return  super.fieldsToString() + ";" + discount;
     }
 }
