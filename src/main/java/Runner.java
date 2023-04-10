@@ -13,7 +13,7 @@ public class Runner {
         boolean allPurchasesAreEquals = true;
         Scanner scanner;
         try {
-            scanner = new Scanner(new FileReader("src/in.txt"));
+            scanner = new Scanner(new FileReader("src/in2.txt"));
             scanner.useLocale(Locale.ENGLISH);
 
             for (int i = 0; i < purchases.length; i++) {
