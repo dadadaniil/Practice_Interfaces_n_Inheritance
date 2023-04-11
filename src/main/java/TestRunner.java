@@ -263,6 +263,7 @@ class TestRunner {
         Assertions.assertEquals(exception.getMessage(), isNoSuchElementException.getMessage());
 
     }
+
     @org.junit.jupiter.api.Test
     void factory() {
         var scanner = new Scanner("GENERAL_PURCHASE Apple 1000 1");
@@ -280,6 +281,15 @@ class TestRunner {
         assertTrue(purchase instanceof ProportionalDiscountPurchase);
         assertEquals(new Euro(3000), purchase.getPriceInEuro());
     }
+
     @org.junit.jupiter.api.Test
-    assertEquals(new Euro(2244), (new Euro(1020)).multiply(2.2, RoundMethod.CEIL, 0));
+    void rounding() {
+        assertEquals(new Euro(2250), (new Euro(1020)).mul(2.2, RoundMethod.CEIL, 0));
+        assertEquals(new Euro(2240), (new Euro(1020)).mul(2.2, RoundMethod.ROUND, 0));
+
+        assertEquals(new Euro(2040), (new Euro(2044)).round(RoundMethod.ROUND, 0));
+        assertEquals(new Euro(2040), (new Euro(2044)).round(RoundMethod.FLOOR, 0));
+        assertEquals(new Euro(2050), (new Euro(2044)).round(RoundMethod.CEIL, 0));
+    }
+
 }
