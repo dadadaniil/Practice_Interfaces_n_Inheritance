@@ -1,8 +1,5 @@
-import entity.Euro;
-import entity.ProportionalDiscountPurchase;
-import entity.Purchase;
+import entity.*;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 class TestRunner {
 
@@ -220,5 +217,12 @@ class TestRunner {
         Purchase purchase = new Purchase("Apple", priceInEuro, 12);
         Object object= new Object();
         Assertions.assertNotEquals(false,purchase.equals(object));
+    }
+    @org.junit.jupiter.api.Test
+    void PurchaseIsEqualsToObjectFromDifferentClasses() {
+        Euro priceInEuro = new Euro(25);//redundant line for better readability
+        Purchase purchase = new Purchase("Apple", priceInEuro, 12);
+        DiscountPerUnitPurchase object= new DiscountPerUnitPurchase("Apple", priceInEuro, 12, 13);
+        Assertions.assertTrue(purchase.equals(object));
     }
 }
