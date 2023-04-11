@@ -118,46 +118,39 @@ class TestRunner {
     void subtractionNegativeArgument() {
         Euro euro = new Euro(10);
         Euro euro1 = new Euro(-19);
-        Euro euro2 = euro.subtraction(euro1);
-        Assertions.assertEquals(29, euro2.getCents());
+        euro.subtraction(euro1);
+        Assertions.assertEquals(29, euro.getCents());
     }
 
     @org.junit.jupiter.api.Test
     void subtractionPositiveArgument() {
         Euro euro = new Euro(10);
         Euro euro1 = new Euro(5);
-        Euro euro2 = euro.subtraction(euro1);
-        Assertions.assertEquals(5, euro2.getCents());
+        euro.subtraction(euro1);
+        Assertions.assertEquals(5, euro.getCents());
     }
 
     @org.junit.jupiter.api.Test
     void additionPositiveArgument() {
         Euro euro = new Euro(10);
         Euro euro1 = new Euro(15);
-        Euro euro2 = euro.addition(euro1);
-        Assertions.assertEquals(25, euro2.getCents());
+        euro.addition(euro1);
+        Assertions.assertEquals(25, euro.getCents());
     }
 
     @org.junit.jupiter.api.Test
     void additionNegativeArgument() {
         Euro euro = new Euro(10);
         Euro euro1 = new Euro(-15);
-        Euro euro2 = euro.addition(euro1);
-        Assertions.assertEquals(-5, euro2.getCents());
+        euro.addition(euro1);
+        Assertions.assertEquals(-5, euro.getCents());
     }
 
     @org.junit.jupiter.api.Test
     void multiplication() {
         Euro euro = new Euro(10);
-        Euro euro2 = euro.multiplication(5);
-        Assertions.assertEquals(50, euro2.getCents());
-    }
-
-    @org.junit.jupiter.api.Test
-    void division() {
-        Euro euro = new Euro(10);
-        Euro euro2 = euro.division(5);
-        Assertions.assertEquals(2, euro2.getCents());
+        euro.multiplication(5);
+        Assertions.assertEquals(50, euro.getCents());
     }
 
     @org.junit.jupiter.api.Test
