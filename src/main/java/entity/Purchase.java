@@ -49,8 +49,7 @@ public class Purchase {
     }
 
     public Euro getCost() {
-        priceInEuro.multiplication(numberOfPurchasedUnits);
-        return new Euro(priceInEuro);
+        return new Euro(priceInEuro.getCents() * numberOfPurchasedUnits);
     }
 
     protected String fieldsToString() {
@@ -65,8 +64,7 @@ public class Purchase {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!(this instanceof Object)) return false;
+        if (o == null || (!(this instanceof Purchase))) return false;
         Purchase purchase = (Purchase) o;
         return productName.equals(purchase.productName) && priceInEuro.getCents() == purchase.priceInEuro.getCents();
 

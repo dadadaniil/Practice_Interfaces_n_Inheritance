@@ -17,12 +17,15 @@ public enum RoundMethod {
             return Math.ceil(d);
         }
     };
+
     abstract double roundFunction(double value);
+
     public static int round(double roundedValue, RoundMethod roundMethod, int d) {
         int tenPow = pow10(d);
         return (int) roundMethod.roundFunction(roundedValue / tenPow) * tenPow;
     }
-    private static int pow10(int d){
+
+    private static int pow10(int d) {
         return 10 ^ d;
     }
 }

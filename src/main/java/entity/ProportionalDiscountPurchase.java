@@ -30,20 +30,19 @@ public class ProportionalDiscountPurchase extends Purchase {
 //        Awesome code Алёны
 
 
-
 //        My code говна:
 //        I will explain the meaning of this code in Russian to make it easier for everyone:
 //        Смысл в том, что от начальной суммы отнимается сумма скидки, умноженная на ноль или единицу в зависимости от того,
 //        больше ли нуля число покупок или нет
 
-//        Of course it is possible to eliminate all this variables and fit all code in fore lines, but it will lead to
-//        decreased readability and it's irrational to punish us for amount of variables.
+//        Of course, it is possible to eliminate all these variables and fit all code in fore lines, but it will lead to
+//        decreased readability, and it's irrational to punish us for amount of variables.
         double otherPartOfDiscount = 1 - ((100 - discount) / 100);
         int doNeedToApplyDiscount;
         int startPrice = getPriceInEuro().getCents() * getNumberOfPurchasedUnits();
-        int amountOfProductsRemainingAfterSubstracting = 9 - getNumberOfPurchasedUnits();
+        int amountOfProductsRemainingAfterSubtracting = 9 - getNumberOfPurchasedUnits();
         try {
-            doNeedToApplyDiscount = amountOfProductsRemainingAfterSubstracting / amountOfProductsRemainingAfterSubstracting;
+            doNeedToApplyDiscount = amountOfProductsRemainingAfterSubtracting / amountOfProductsRemainingAfterSubtracting;
         } catch (ArithmeticException arithmeticException) {
             doNeedToApplyDiscount = 0;
         }
@@ -56,6 +55,6 @@ public class ProportionalDiscountPurchase extends Purchase {
 
     @Override
     protected String fieldsToString() {
-        return  super.fieldsToString() + ";" + discount;
+        return super.fieldsToString() + ";" + discount;
     }
 }
