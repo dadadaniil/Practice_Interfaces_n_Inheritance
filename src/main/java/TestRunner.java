@@ -1,6 +1,8 @@
-package entity;
-
+import entity.Euro;
+import entity.ProportionalDiscountPurchase;
+import entity.Purchase;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 class TestRunner {
 
@@ -180,16 +182,43 @@ class TestRunner {
     }
 
     @org.junit.jupiter.api.Test
-    void PurchaseGetCost() {
-        Euro priceInEuro = new Euro(25);//redundant line for best readability
-        Purchase purchase = new Purchase("Apple", priceInEuro, 12);
-        Assertions.assertEquals(new Euro(300), purchase.getCost());
+    void PurchaseGetCostWithEnoughForDiscountPurchasesAndZeroDiscount() {
+        Euro priceInEuro = new Euro(20);//redundant line for best readability
+        ProportionalDiscountPurchase proportionalDiscountPurchase=new ProportionalDiscountPurchase("Apple", priceInEuro, 10,10,0d);
+        Assertions.assertEquals(new Euro(200), proportionalDiscountPurchase.getCost());
+    }
+
+    @org.junit.jupiter.api.Test
+    void PurchaseGetCostWithControlNumberOfPurchases() {
+        Euro priceInEuro = new Euro(10);//redundant line for best readability
+        ProportionalDiscountPurchase proportionalDiscountPurchase=new ProportionalDiscountPurchase("Apple", priceInEuro, 10,10,10d);
+        Assertions.assertEquals(new Euro(90), proportionalDiscountPurchase.getCost());
+    }
+    @org.junit.jupiter.api.Test
+    void PurchaseGetCostWithNotEnoughForDiscountPurchases() {
+        Euro priceInEuro = new Euro(5);//redundant line for best readability
+        ProportionalDiscountPurchase proportionalDiscountPurchase=new ProportionalDiscountPurchase("Apple", priceInEuro, 2,10,10d);
+        Assertions.assertEquals(new Euro(10), proportionalDiscountPurchase.getCost());
+    }
+
+    @org.junit.jupiter.api.Test
+    void PurchaseGetCostWithEnoughForDiscountPurchases() {
+        Euro priceInEuro = new Euro(5);//redundant line for best readability
+        ProportionalDiscountPurchase proportionalDiscountPurchase=new ProportionalDiscountPurchase("Apple", priceInEuro, 12,10,10d);
+        Assertions.assertEquals(new Euro(54), proportionalDiscountPurchase.getCost());
     }
 
     @org.junit.jupiter.api.Test
     void PurchaseIsEquals() {
-        Euro priceInEuro = new Euro(25);//redundant line for best readability
+        Euro priceInEuro = new Euro(25);//redundant line for better readability
         Purchase purchase = new Purchase("Apple", priceInEuro, 12);
         Assertions.assertEquals(purchase, purchase);
+    }
+    @org.junit.jupiter.api.Test
+    void PurchaseIsEqualsToObject() {
+        Euro priceInEuro = new Euro(25);//redundant line for better readability
+        Purchase purchase = new Purchase("Apple", priceInEuro, 12);
+        Object object= new Object();
+        Assertions.assertNotEquals(false,purchase.equals(object));
     }
 }
