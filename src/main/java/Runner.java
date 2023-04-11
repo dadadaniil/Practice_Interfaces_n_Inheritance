@@ -8,7 +8,8 @@ import java.util.Scanner;
 public class Runner {
     public static void main(String[] args) {
         //1.
-        Purchase[] purchases = new Purchase[6];
+        final int PURCHASES_NUMBER = 6;
+        Purchase[] purchases = new Purchase[PURCHASES_NUMBER];
         Purchase purchaseWithMaxCost = new Purchase();
         boolean allPurchasesAreEquals = true;
         Scanner scanner;
@@ -26,13 +27,14 @@ public class Runner {
                     purchaseWithMaxCost = purchases[i];
                 }
                 //5.
-                if (!purchases[i].equals(purchases[0])) {
-                    allPurchasesAreEquals = false;
+                if (allPurchasesAreEquals) {
+                    allPurchasesAreEquals = purchases[i].equals(purchases[0]);
                 }
 
+                System.out.println(allPurchasesAreEquals);
             }
             System.out.println();
-            System.out.println("The purchase with the most cost is " + purchaseWithMaxCost.toString());
+            System.out.println("The purchase with the most cost is " + purchaseWithMaxCost);
             System.out.println();
 
             if (allPurchasesAreEquals) {
@@ -42,7 +44,7 @@ public class Runner {
             }
             scanner.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.err.println("Input file is not found");
         }
     }
 }

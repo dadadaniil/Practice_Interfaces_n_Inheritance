@@ -20,9 +20,7 @@ public class DiscountPerUnitPurchase extends Purchase {
 
     @Override
     public Euro getCost() {
-        getPriceInEuro().subtraction(discount);
-        getPriceInEuro().multiplication(getNumberOfPurchasedUnits());
-        return new Euro(getPriceInEuro());
+        return new Euro((getPriceInEuro().getCents() - discount.getCents()) * getNumberOfPurchasedUnits());
     }
     @Override
     protected String fieldsToString() {
