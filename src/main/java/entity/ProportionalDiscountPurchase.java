@@ -38,10 +38,10 @@ public class ProportionalDiscountPurchase extends Purchase {
 
 //        Of course it is possible to eliminate all this variables and fit all code in fore lines, but it will lead to
 //        decreased readability and it's irrational to punish us for amount of variables.
-        double otherPartOfDiscount = 1 - Math.ceil(((100 - discount)) / 100);
+        double otherPartOfDiscount = 1 - ((100 - discount) / 100);
         int doNeedToApplyDiscount;
         int startPrice = getPriceInEuro().getCents() * getNumberOfPurchasedUnits();
-        int amountOfProductsRemainingAfterSubstracting = 10 - getNumberOfPurchasedUnits();
+        int amountOfProductsRemainingAfterSubstracting = 9 - getNumberOfPurchasedUnits();
         try {
             doNeedToApplyDiscount = amountOfProductsRemainingAfterSubstracting / amountOfProductsRemainingAfterSubstracting;
         } catch (ArithmeticException arithmeticException) {
