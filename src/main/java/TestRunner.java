@@ -1,14 +1,15 @@
-import entity.Euro;
-import entity.ProportionalDiscountPurchase;
-import entity.Purchase;
-import entity.PurchasesFactory;
+import entity.*;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 class TestRunner {
@@ -190,49 +191,49 @@ class TestRunner {
 
     @org.junit.jupiter.api.Test
     void PurchaseGetCostWithEnoughForDiscountPurchasesAndZeroDiscount() {
-        Euro priceInEuro = new Euro(20);//redundant line for best readability
-        ProportionalDiscountPurchase proportionalDiscountPurchase = new ProportionalDiscountPurchase("Apple", priceInEuro, 10, 10, 0d);
+        Euro priceInEuro = new Euro(20);
+        var proportionalDiscountPurchase = new ProportionalDiscountPurchase("Apple", priceInEuro, 10, 0d);
         Assertions.assertEquals(new Euro(200), proportionalDiscountPurchase.getCost());
         Assertions.assertEquals(20, priceInEuro.getCents());
     }
 
     @org.junit.jupiter.api.Test
     void PurchaseGetCostWithControlNumberOfPurchases() {
-        Euro priceInEuro = new Euro(10);//redundant line for best readability
-        ProportionalDiscountPurchase proportionalDiscountPurchase = new ProportionalDiscountPurchase("Apple", priceInEuro, 10, 10, 10d);
+        Euro priceInEuro = new Euro(10);
+        var proportionalDiscountPurchase = new ProportionalDiscountPurchase("Apple", priceInEuro, 10, 10d);
         Assertions.assertEquals(new Euro(90), proportionalDiscountPurchase.getCost());
         Assertions.assertEquals(10, priceInEuro.getCents());
     }
 
     @org.junit.jupiter.api.Test
     void PurchaseGetCostWithNotEnoughForDiscountPurchases() {
-        Euro priceInEuro = new Euro(5);//redundant line for best readability
-        ProportionalDiscountPurchase proportionalDiscountPurchase = new ProportionalDiscountPurchase("Apple", priceInEuro, 2, 10, 10d);
+        Euro priceInEuro = new Euro(5);
+        var proportionalDiscountPurchase = new ProportionalDiscountPurchase("Apple", priceInEuro, 2, 10d);
         Assertions.assertEquals(new Euro(10), proportionalDiscountPurchase.getCost());
         Assertions.assertEquals(5, priceInEuro.getCents());
     }
 
     @org.junit.jupiter.api.Test
     void PurchaseGetCostWithEnoughForDiscountPurchases() {
-        Euro priceInEuro = new Euro(5);//redundant line for best readability
-        ProportionalDiscountPurchase proportionalDiscountPurchase = new ProportionalDiscountPurchase("Apple", priceInEuro, 12, 10, 10d);
+        Euro priceInEuro = new Euro(5);
+        var proportionalDiscountPurchase = new ProportionalDiscountPurchase("Apple", priceInEuro, 12, 10d);
         Assertions.assertEquals(new Euro(54), proportionalDiscountPurchase.getCost());
         Assertions.assertEquals(5, priceInEuro.getCents());
     }
 
     @org.junit.jupiter.api.Test
     void PurchaseIsEquals() {
-        Euro priceInEuro = new Euro(25);//redundant line for better readability
+        Euro priceInEuro = new Euro(25);
         Purchase purchase = new Purchase("Apple", priceInEuro, 12);
         Assertions.assertEquals(purchase, purchase);
     }
 
     @org.junit.jupiter.api.Test
     void PurchaseIsEqualsToObject() {
-        Euro priceInEuro = new Euro(25);//redundant line for better readability
+        Euro priceInEuro = new Euro(25);
         Purchase purchase = new Purchase("Apple", priceInEuro, 12);
         Object object = new Object();
-        Assertions.assertEquals(false, purchase.equals(object));
+        Assertions.assertFalse(purchase.equals(object));
     }
 
     @org.junit.jupiter.api.Test
@@ -262,4 +263,23 @@ class TestRunner {
         Assertions.assertEquals(exception.getMessage(), isNoSuchElementException.getMessage());
 
     }
+    @org.junit.jupiter.api.Test
+    void factory() {
+        var scanner = new Scanner("GENERAL_PURCHASE Apple 1000 1");
+        var purchase = PurchasesFactory.getPurchaseFromFactory(scanner);
+        assertTrue(purchase instanceof Purchase);
+        assertEquals(new Euro(1000), purchase.getPriceInEuro());
+
+        scanner = new Scanner("PURCHASE_WITH_DISCOUNT Apple 2000 2 1");
+        purchase = PurchasesFactory.getPurchaseFromFactory(scanner);
+        assertTrue(purchase instanceof DiscountPerUnitPurchase);
+        assertEquals(new Euro(2000), purchase.getPriceInEuro());
+
+        scanner = new Scanner("PURCHASE_WITH_PROPORTIONAL_DISCOUNT Apple 3000 3 5 0.2");
+        purchase = PurchasesFactory.getPurchaseFromFactory(scanner);
+        assertTrue(purchase instanceof ProportionalDiscountPurchase);
+        assertEquals(new Euro(3000), purchase.getPriceInEuro());
+    }
+    @org.junit.jupiter.api.Test
+    assertEquals(new Euro(2244), (new Euro(1020)).multiply(2.2, RoundMethod.CEIL, 0));
 }
