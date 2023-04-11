@@ -10,18 +10,19 @@ public class PurchasesFactory {
                 return new Purchase(sc);
             }
         },
-        PURCHASE_WITH_DISCOUNT{
+        PURCHASE_WITH_DISCOUNT {
             @Override
             Purchase getPurchase(Scanner sc) {
                 return new DiscountPerUnitPurchase(sc);
             }
         },
-        PURCHASE_WITH_PROPORTIONAL_DISCOUNT{
+        PURCHASE_WITH_PROPORTIONAL_DISCOUNT {
             @Override
             Purchase getPurchase(Scanner sc) {
                 return new ProportionalDiscountPurchase(sc);
             }
         };
+
         abstract Purchase getPurchase(Scanner sc);
     }
 

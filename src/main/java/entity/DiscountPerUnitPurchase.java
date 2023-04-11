@@ -22,6 +22,7 @@ public class DiscountPerUnitPurchase extends Purchase {
     public Euro getCost() {
         return new Euro((getPriceInEuro().getCents() - discount.getCents()) * getNumberOfPurchasedUnits());
     }
+
     @Override
     protected String fieldsToString() {
         return super.fieldsToString() + ";" + discount;

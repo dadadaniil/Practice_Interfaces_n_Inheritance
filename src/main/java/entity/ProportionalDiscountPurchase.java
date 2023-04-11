@@ -30,7 +30,6 @@ public class ProportionalDiscountPurchase extends Purchase {
 //        Awesome code Алёны
 
 
-
 //        My code говна:
 //        I will explain the meaning of this code in Russian to make it easier for everyone:
 //        Смысл в том, что от начальной суммы отнимается сумма скидки, умноженная на ноль или единицу в зависимости от того,
@@ -56,6 +55,6 @@ public class ProportionalDiscountPurchase extends Purchase {
 
     @Override
     protected String fieldsToString() {
-        return  super.fieldsToString() + ";" + discount;
+        return super.fieldsToString() + ";" + discount;
     }
 }

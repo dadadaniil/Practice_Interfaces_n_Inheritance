@@ -11,10 +11,12 @@ public class Euro implements Comparable<Euro> {
 
     public Euro() {
     }
-    public Euro(int euros, int cents){
+
+    public Euro(int euros, int cents) {
         this(euros * 100 + cents);
     }
-    public Euro(Euro euro){
+
+    public Euro(Euro euro) {
         this(euro.getCents());
     }
 
@@ -72,17 +74,21 @@ public class Euro implements Comparable<Euro> {
     public void zeroing() {
         this.cents = 0;
     }
-    public int getRubs(){
+
+    public int getRubs() {
         return cents / 100;
     }
-    public int getCoins(){
+
+    public int getCoins() {
         return cents % 100;
     }
-    public Euro mul(double k, RoundMethod roundMethod, int d){
+
+    public Euro mul(double k, RoundMethod roundMethod, int d) {
         cents = RoundMethod.round(cents * k, roundMethod, d);
         return this;
     }
-    public Euro round(RoundMethod roundMethod, int d){
+
+    public Euro round(RoundMethod roundMethod, int d) {
         cents = RoundMethod.round(cents, roundMethod, d);
         return this;
     }
