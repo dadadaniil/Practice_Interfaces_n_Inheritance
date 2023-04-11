@@ -84,12 +84,12 @@ public class Euro implements Comparable<Euro> {
     }
 
     public Euro mul(double k, RoundMethod roundMethod, int d) {
-        cents = RoundMethod.round(cents * k, roundMethod, d);
+        cents = roundMethod.round(cents * k, roundMethod, d);
         return this;
     }
 
     public Euro round(RoundMethod roundMethod, int d) {
-        cents = RoundMethod.round(cents, roundMethod, d);
+        cents = roundMethod.round(cents, roundMethod, d);
         return this;
     }
 }

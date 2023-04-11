@@ -19,9 +19,21 @@ public class Purchase {
     }
 
     public Purchase(Scanner scanner) {
-        this.productName = scanner.next();
-        this.priceInEuro = new Euro(scanner.nextInt());
-        this.numberOfPurchasedUnits = scanner.nextInt();
+        if (scanner.hasNext()) {
+            this.productName = scanner.next();
+        } else {
+            throw new RuntimeException("Invalid input");
+        }
+        if (scanner.hasNextInt()) {
+            this.priceInEuro = new Euro(scanner.nextInt());
+        } else {
+            throw new RuntimeException("Invalid input");
+        }
+        if (scanner.hasNextInt()) {
+            this.numberOfPurchasedUnits = scanner.nextInt();
+        } else {
+            throw new RuntimeException("Invalid input");
+        }
     }
 
     public String getProductName() {
