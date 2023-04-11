@@ -63,8 +63,8 @@ public class Purchase {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Purchase purchase)) return false;
         if (this == o) return true;
+        if (!(o instanceof Purchase purchase)) return false;
         return productName.equals(purchase.productName) && priceInEuro.getCents() == purchase.priceInEuro.getCents();
     }
 
