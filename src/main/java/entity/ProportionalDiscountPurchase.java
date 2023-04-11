@@ -40,13 +40,13 @@ public class ProportionalDiscountPurchase extends Purchase {
         double otherPartOfDiscount = 1 - ((100 - discount) / 100);
         int doNeedToApplyDiscount;
         int startPrice = getPriceInEuro().getCents() * getNumberOfPurchasedUnits();
-        int amountOfProductsRemainingAfterSubtracting = 9 - getNumberOfPurchasedUnits();
+        int amountOfProductsRemainingAfterSubtracting = Math.min(9 - getNumberOfPurchasedUnits(),0);
         try {
             doNeedToApplyDiscount = amountOfProductsRemainingAfterSubtracting / amountOfProductsRemainingAfterSubtracting;
         } catch (ArithmeticException arithmeticException) {
             doNeedToApplyDiscount = 0;
         }
-        double discountInValue = Math.max(1, doNeedToApplyDiscount) * startPrice * otherPartOfDiscount;
+        double discountInValue = doNeedToApplyDiscount * startPrice * otherPartOfDiscount;
         double resultPrice = startPrice - discountInValue;
 
         return new Euro((int) resultPrice);
