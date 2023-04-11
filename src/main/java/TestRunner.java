@@ -1,8 +1,15 @@
 import entity.Euro;
 import entity.ProportionalDiscountPurchase;
 import entity.Purchase;
+import entity.PurchasesFactory;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Locale;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
 
 class TestRunner {
 
@@ -184,28 +191,33 @@ class TestRunner {
     @org.junit.jupiter.api.Test
     void PurchaseGetCostWithEnoughForDiscountPurchasesAndZeroDiscount() {
         Euro priceInEuro = new Euro(20);//redundant line for best readability
-        ProportionalDiscountPurchase proportionalDiscountPurchase=new ProportionalDiscountPurchase("Apple", priceInEuro, 10,10,0d);
+        ProportionalDiscountPurchase proportionalDiscountPurchase = new ProportionalDiscountPurchase("Apple", priceInEuro, 10, 10, 0d);
         Assertions.assertEquals(new Euro(200), proportionalDiscountPurchase.getCost());
+        Assertions.assertEquals(20, priceInEuro.getCents());
     }
 
     @org.junit.jupiter.api.Test
     void PurchaseGetCostWithControlNumberOfPurchases() {
         Euro priceInEuro = new Euro(10);//redundant line for best readability
-        ProportionalDiscountPurchase proportionalDiscountPurchase=new ProportionalDiscountPurchase("Apple", priceInEuro, 10,10,10d);
+        ProportionalDiscountPurchase proportionalDiscountPurchase = new ProportionalDiscountPurchase("Apple", priceInEuro, 10, 10, 10d);
         Assertions.assertEquals(new Euro(90), proportionalDiscountPurchase.getCost());
+        Assertions.assertEquals(10, priceInEuro.getCents());
     }
+
     @org.junit.jupiter.api.Test
     void PurchaseGetCostWithNotEnoughForDiscountPurchases() {
         Euro priceInEuro = new Euro(5);//redundant line for best readability
-        ProportionalDiscountPurchase proportionalDiscountPurchase=new ProportionalDiscountPurchase("Apple", priceInEuro, 2,10,10d);
+        ProportionalDiscountPurchase proportionalDiscountPurchase = new ProportionalDiscountPurchase("Apple", priceInEuro, 2, 10, 10d);
         Assertions.assertEquals(new Euro(10), proportionalDiscountPurchase.getCost());
+        Assertions.assertEquals(5, priceInEuro.getCents());
     }
 
     @org.junit.jupiter.api.Test
     void PurchaseGetCostWithEnoughForDiscountPurchases() {
         Euro priceInEuro = new Euro(5);//redundant line for best readability
-        ProportionalDiscountPurchase proportionalDiscountPurchase=new ProportionalDiscountPurchase("Apple", priceInEuro, 12,10,10d);
+        ProportionalDiscountPurchase proportionalDiscountPurchase = new ProportionalDiscountPurchase("Apple", priceInEuro, 12, 10, 10d);
         Assertions.assertEquals(new Euro(54), proportionalDiscountPurchase.getCost());
+        Assertions.assertEquals(5, priceInEuro.getCents());
     }
 
     @org.junit.jupiter.api.Test
@@ -214,11 +226,40 @@ class TestRunner {
         Purchase purchase = new Purchase("Apple", priceInEuro, 12);
         Assertions.assertEquals(purchase, purchase);
     }
+
     @org.junit.jupiter.api.Test
     void PurchaseIsEqualsToObject() {
         Euro priceInEuro = new Euro(25);//redundant line for better readability
         Purchase purchase = new Purchase("Apple", priceInEuro, 12);
-        Object object= new Object();
-        Assertions.assertNotEquals(false,purchase.equals(object));
+        Object object = new Object();
+        Assertions.assertEquals(false, purchase.equals(object));
+    }
+
+    @org.junit.jupiter.api.Test
+    void getPurchaseFromFactory() throws FileNotFoundException {
+        Scanner scanner = new Scanner(new FileReader("src/in2.txt"));
+        scanner.useLocale(Locale.ENGLISH);
+        Assertions.assertEquals("Purchase;Milk;1.80;3;5.40", PurchasesFactory.getPurchaseFromFactory(scanner).toString());
+    }
+
+    @org.junit.jupiter.api.Test
+    void getPurchaseFromFactoryNonExistingObject() throws NoSuchElementException, FileNotFoundException {
+        Exception isNoSuchElementException = null;
+
+        Scanner scanner = new Scanner(new FileReader("src/in2.txt"));
+        scanner.useLocale(Locale.ENGLISH);
+        int counter = 0;
+        while (counter < 6) {
+            counter++;
+            PurchasesFactory.getPurchaseFromFactory(scanner);
+        }
+        try {
+            PurchasesFactory.getPurchaseFromFactory(scanner);
+        } catch (NoSuchElementException noSuchElementException) {
+            isNoSuchElementException = noSuchElementException;
+        }
+        NoSuchElementException exception = new NoSuchElementException();
+        Assertions.assertEquals(exception.getMessage(), isNoSuchElementException.getMessage());
+
     }
 }
