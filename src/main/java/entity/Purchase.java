@@ -28,10 +28,17 @@ public class Purchase {
         return productName;
     }
 
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
     public Euro getPriceInEuro() {
         return priceInEuro;
     }
 
+    public void setPriceInEuro(Euro priceInEuro) {
+        this.priceInEuro = priceInEuro;
+    }
 
     public int getNumberOfPurchasedUnits() {
         return numberOfPurchasedUnits;
@@ -41,20 +48,13 @@ public class Purchase {
         this.numberOfPurchasedUnits = numberOfPurchasedUnits;
     }
 
-    public void setPriceInEuro(Euro priceInEuro) {
-        this.priceInEuro = priceInEuro;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
     public Euro getCost() {
         priceInEuro.multiplication(numberOfPurchasedUnits);
         return new Euro(priceInEuro);
     }
+
     protected String fieldsToString() {
-        return  getClass().getSimpleName() + ";" + productName + ";" + priceInEuro + ";" + numberOfPurchasedUnits;
+        return getClass().getSimpleName() + ";" + productName + ";" + priceInEuro + ";" + numberOfPurchasedUnits;
     }
 
     @Override
@@ -66,9 +66,10 @@ public class Purchase {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!(this instanceof Object))return false;
+        if (!(this instanceof Object)) return false;
         Purchase purchase = (Purchase) o;
-        return Objects.equals(productName, purchase.productName) && Objects.equals(priceInEuro, purchase.priceInEuro);
+        return productName.equals(purchase.productName) && priceInEuro.getCents() == purchase.priceInEuro.getCents();
+
     }
 
     @Override
