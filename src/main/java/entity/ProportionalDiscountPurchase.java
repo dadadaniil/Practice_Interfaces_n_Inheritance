@@ -29,6 +29,8 @@ public class ProportionalDiscountPurchase extends Purchase {
 //        return super.getCost();
 //        Awesome code Алёны
 
+
+
 //        My code говна:
 //        I will explain the meaning of this code in Russian to make it easier for everyone:
 //        Смысл в том, что от начальной суммы отнимается сумма скидки, умноженная на ноль или единицу в зависимости от того,

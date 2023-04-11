@@ -66,6 +66,7 @@ public class Purchase {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!(this instanceof Object))return false;
         Purchase purchase = (Purchase) o;
         return Objects.equals(productName, purchase.productName) && Objects.equals(priceInEuro, purchase.priceInEuro);
     }
