@@ -22,10 +22,10 @@ public class ProportionalDiscountPurchase extends Purchase {
     @Override
     public Euro getCost() {
 
-        double otherPartOfDiscount = 1 - ((100 - discount) / 100);
+        double otherPartOfDiscount = discount/100;
         int doNeedToApplyDiscount;
         int startPrice = getPriceInEuro().getCents() * getNumberOfPurchasedUnits();
-        int amountOfProductsRemainingAfterSubtracting = Math.min(9 - getNumberOfPurchasedUnits(),0);
+        int amountOfProductsRemainingAfterSubtracting = Math.min(CONTROL_NUMBER_OF_UNITS-1 - getNumberOfPurchasedUnits(),0);
         try {
             doNeedToApplyDiscount = amountOfProductsRemainingAfterSubtracting / amountOfProductsRemainingAfterSubtracting;
         } catch (ArithmeticException arithmeticException) {
