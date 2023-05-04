@@ -1,5 +1,6 @@
 package entity;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class ProportionalDiscountPurchase extends Purchase {
@@ -34,7 +35,9 @@ public class ProportionalDiscountPurchase extends Purchase {
         double discountInValue = doNeedToApplyDiscount * startPrice * otherPartOfDiscount;
         double resultPrice = startPrice - discountInValue;
 
-        return new Euro((int) resultPrice);
+        DecimalFormat df = new DecimalFormat("#.##");
+
+        return new Euro((int) Double.parseDouble(df.format(Math.ceil(resultPrice * 100.0) / 100.0)));
 
     }
 
