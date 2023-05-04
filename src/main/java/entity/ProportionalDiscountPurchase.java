@@ -1,6 +1,5 @@
 package entity;
 
-import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class ProportionalDiscountPurchase extends Purchase {
@@ -23,21 +22,13 @@ public class ProportionalDiscountPurchase extends Purchase {
     @Override
     public Euro getCost() {
 
-        double otherPartOfDiscount = discount/100;
-        int doNeedToApplyDiscount;
-        int startPrice = getPriceInEuro().getCents() * getNumberOfPurchasedUnits();
-        int amountOfProductsRemainingAfterSubtracting = Math.min(CONTROL_NUMBER_OF_UNITS-1 - getNumberOfPurchasedUnits(),0);
-        try {
-            doNeedToApplyDiscount = amountOfProductsRemainingAfterSubtracting / amountOfProductsRemainingAfterSubtracting;
-        } catch (ArithmeticException arithmeticException) {
-            doNeedToApplyDiscount = 0;
+        Euro euro = new Euro();
+        if (getNumberOfPurchasedUnits() > CONTROL_NUMBER_OF_UNITS) {
+            euro.setCents((int) Math.ceil(((100 - discount) / 100 * getPriceInEuro().getCents() * getNumberOfPurchasedUnits())));
+        } else {
+            euro = super.getCost();
         }
-        double discountInValue = doNeedToApplyDiscount * startPrice * otherPartOfDiscount;
-        double resultPrice = startPrice - discountInValue;
-
-        DecimalFormat df = new DecimalFormat("#.##");
-
-        return new Euro((int) Double.parseDouble(df.format(Math.ceil(resultPrice * 100.0) / 100.0)));
+        return euro;
 
     }
 
