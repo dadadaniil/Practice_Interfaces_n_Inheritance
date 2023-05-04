@@ -13,8 +13,9 @@ public class Runner {
         Purchase purchaseWithMaxCost = new Purchase();
         boolean allPurchasesAreEquals = true;
         Scanner scanner;
+        String path = "src/in.txt";
         try {
-            scanner = new Scanner(new FileReader("src/in.txt"));
+            scanner = new Scanner(new FileReader(path));
             scanner.useLocale(Locale.ENGLISH);
 
             for (int i = 0; i < purchases.length; i++) {
