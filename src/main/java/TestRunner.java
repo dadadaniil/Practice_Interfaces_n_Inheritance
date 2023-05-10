@@ -282,12 +282,12 @@ class TestRunner {
 
     @Test
     void rounding() {
-        assertEquals(new Euro(2250), (new Euro(1020)).mul(2.2, RoundMethod.CEIL, 0));
-        assertEquals(new Euro(2240), (new Euro(1020)).mul(2.2, RoundMethod.ROUND, 0));
+        assertEquals(new Euro(2250), (new Euro(1020)).mul(2.2, RoundMethod.CEIL, 1));
+        assertEquals(new Euro(2240), (new Euro(1020)).mul(2.2, RoundMethod.ROUND, 1));
 
-        assertEquals(new Euro(2040), (new Euro(2044)).round(RoundMethod.ROUND, 0));
-        assertEquals(new Euro(2040), (new Euro(2044)).round(RoundMethod.FLOOR, 0));
-        assertEquals(new Euro(2050), (new Euro(2044)).round(RoundMethod.CEIL, 0));
+        assertEquals(new Euro(2040), (new Euro(2044)).round(RoundMethod.ROUND, 1));
+        assertEquals(new Euro(2040), (new Euro(2044)).round(RoundMethod.FLOOR, 1));
+        assertEquals(new Euro(2050), (new Euro(2044)).round(RoundMethod.CEIL, 1));
     }
 
 }

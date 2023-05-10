@@ -26,6 +26,17 @@ public enum RoundMethod {
     }
 
     private static int pow10(int d) {
-        return 10 ^ d;
+        return switch (d) {
+            case 0 -> 1;
+            case 1 -> 10;
+            case 2 -> 100;
+            case 3 -> 1000;
+            case 4 -> 10000;
+            case 5 -> 100000;
+            case 6 -> 1000000;
+            case 7 -> 10000000;
+            case 8 -> 100000000;
+            default -> 0;
+        };
     }
 }
