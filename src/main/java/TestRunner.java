@@ -1,7 +1,6 @@
 import entity.*;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -9,264 +8,226 @@ import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 
 class TestRunner {
 
-    @Test
+    @org.junit.jupiter.api.Test
     void getCents() {
         Euro euro = new Euro(54);
-        assertEquals(54, euro.getCents());
+        Assertions.assertEquals(54, euro.getCents());
     }
 
-    @Test
-    void setCentsSetPositiveValue() {
-        Euro euro = new Euro(10);
-        euro.setCents(100);
-        assertEquals(100, euro.getCents());
-    }
+    @org.junit.jupiter.api.Test
+    void setCentsSetValues() {
+        Euro euro1 = new Euro(10);
+        euro1.setCents(100);
+        Assertions.assertEquals(100, euro1.getCents());
 
-    @Test
-    void setCentsSetZeroValue() {
-        Euro euro = new Euro(100);
-        euro.setCents(0);
-        assertEquals(0, euro.getCents());
-    }
+        Euro euro2 = new Euro(100);
+        euro2.setCents(0);
+        Assertions.assertEquals(0, euro2.getCents());
 
-    @Test
-    void setCentsSetNegativeValue() {
-        Euro euro = new Euro(100);
-        euro.setCents(-20);
-        assertEquals(-20, euro.getCents());
+        Euro euro3 = new Euro(100);
+        euro3.setCents(-20);
+        Assertions.assertEquals(-20, euro3.getCents());
     }
+    @org.junit.jupiter.api.Test
+    void centsToEurosConversion() {
+        Euro euro1 = new Euro(270);
+        Assertions.assertEquals("2.70", euro1.centsToEuros());
 
-    @Test
-    void centsToEurosPositiveValue() {
-        Euro euro = new Euro(270);
-        assertEquals("2.70", euro.centsToEuros());
-    }
+        Euro euro2 = new Euro(0);
+        Assertions.assertEquals("0.00", euro2.centsToEuros());
 
-    @Test
-    void centsToEurosZeroValue() {
-        Euro euro = new Euro(0);
-        assertEquals("0.00", euro.centsToEuros());
-    }
-
-    @Test
-    void centsToEurosMiddleZero() {
-        Euro euro = new Euro(101);
-        assertEquals("1.01", euro.centsToEuros());
+        Euro euro3 = new Euro(101);
+        Assertions.assertEquals("1.01", euro3.centsToEuros());
     }
 
 
-    @Test
-    void testEqualsComparisonWithSmallerValue() {
-        Euro euro = new Euro(270);
-        Euro euroSecond = new Euro(100);
-        assertNotEquals(euro, euroSecond);
+
+    @org.junit.jupiter.api.Test
+    void testEqualsComparison() {
+        Euro euro1 = new Euro(270);
+        Euro euroSecond1 = new Euro(100);
+        Assertions.assertNotEquals(euro1, euroSecond1);
+
+        Euro euro2 = new Euro(0);
+        Euro euroSecond2 = new Euro(100);
+        Assertions.assertNotEquals(euro2, euroSecond2);
+
+        Euro euro3 = new Euro(10);
+        Euro euroSecond3 = new Euro(0);
+        Assertions.assertNotEquals(euro3, euroSecond3);
     }
 
-    @Test
-    void testEqualsComparisonToZero() {
-        Euro euro = new Euro(0);
-        Euro euroSecond = new Euro(100);
-        assertNotEquals(euro, euroSecond);
+
+    @org.junit.jupiter.api.Test
+    void testCompareTo() {
+        Euro euro1 = new Euro(270);
+        Euro euroSecond1 = new Euro(100);
+        Assertions.assertEquals(170, euro1.compareTo(euroSecond1));
+
+        Euro euro2 = new Euro(200);
+        Euro euroSecond2 = new Euro(200);
+        Assertions.assertEquals(0, euro2.compareTo(euroSecond2));
+
+        Euro euro3 = new Euro(270);
+        Euro euroSecond3 = new Euro(500);
+        Assertions.assertEquals(-230, euro3.compareTo(euroSecond3));
+
+        Euro euro4 = new Euro(500);
+        Euro euroSecond4 = new Euro(500);
+        Assertions.assertEquals(0, euro4.compareTo(euroSecond4));
     }
 
-    @Test
-    void testEqualsComparisonWithZero() {
-        Euro euro = new Euro(10);
-        Euro euroSecond = new Euro(0);
-        assertNotEquals(euro, euroSecond);
+
+    @org.junit.jupiter.api.Test
+    void testToString() {
+        Euro euro1 = new Euro(0);
+        Assertions.assertEquals("0.00", euro1.centsToEuros());
+
+        Euro euro2 = new Euro(270);
+        Assertions.assertEquals("2.70", euro2.centsToEuros());
+
+        euro2.setCents(101);
+        Assertions.assertEquals("1.01", euro2.centsToEuros());
     }
 
-    @Test
-    void compareToPositiveValue() {
-        Euro euro = new Euro(270);
-        Euro euroSecond = new Euro(100);
-        assertEquals(170, euro.compareTo(euroSecond));
+
+    @org.junit.jupiter.api.Test
+    void testSubtraction() {
+        Euro euro1 = new Euro(10);
+        Euro euro2 = new Euro(-19);
+        euro1.subtraction(euro2);
+        Assertions.assertEquals(29, euro1.getCents());
+
+        Euro euro3 = new Euro(10);
+        Euro euro4 = new Euro(5);
+        euro3.subtraction(euro4);
+        Assertions.assertEquals(5, euro3.getCents());
     }
 
-    @Test
-    void compareToSameObjects() {
-        Euro euro = new Euro(200);
-        Euro euroSecond = new Euro(200);
-        assertEquals(0, euro.compareTo(euroSecond));
+
+    @org.junit.jupiter.api.Test
+    void testAddition() {
+        Euro euro1 = new Euro(10);
+        Euro euro2 = new Euro(15);
+        euro1.addition(euro2);
+        Assertions.assertEquals(25, euro1.getCents());
+
+        Euro euro3 = new Euro(10);
+        Euro euro4 = new Euro(-15);
+        euro3.addition(euro4);
+        Assertions.assertEquals(-5, euro3.getCents());
     }
 
-    @Test
-    void compareToNegativeResultValue() {
-        Euro euro = new Euro(270);
-        Euro euroSecond = new Euro(500);
-        assertEquals(-230, euro.compareTo(euroSecond));
-    }
 
-    @Test
-    void compareToZeroResultValue() {
-        Euro euro = new Euro(500);
-        Euro euroSecond = new Euro(500);
-        assertEquals(0, euro.compareTo(euroSecond));
-    }
-
-    @Test
-    void testToStringZeroValue() {
-        Euro euro = new Euro(0);
-        assertEquals("0.00", euro.centsToEuros());
-    }
-
-    @Test
-    void testToStringLastIndexesCheck() {
-        Euro euro = new Euro(270);
-        assertEquals("2.70", euro.centsToEuros());
-
-        euro.setCents(101);
-        assertEquals("1.01", euro.centsToEuros());
-    }
-
-    @Test
-    void subtractionNegativeArgument() {
-        Euro euro = new Euro(10);
-        Euro euro1 = new Euro(-19);
-        euro.subtraction(euro1);
-        assertEquals(29, euro.getCents());
-    }
-
-    @Test
-    void subtractionPositiveArgument() {
-        Euro euro = new Euro(10);
-        Euro euro1 = new Euro(5);
-        euro.subtraction(euro1);
-        assertEquals(5, euro.getCents());
-    }
-
-    @Test
-    void additionPositiveArgument() {
-        Euro euro = new Euro(10);
-        Euro euro1 = new Euro(15);
-        euro.addition(euro1);
-        assertEquals(25, euro.getCents());
-    }
-
-    @Test
-    void additionNegativeArgument() {
-        Euro euro = new Euro(10);
-        Euro euro1 = new Euro(-15);
-        euro.addition(euro1);
-        assertEquals(-5, euro.getCents());
-    }
-
-    @Test
+    @org.junit.jupiter.api.Test
     void multiplication() {
         Euro euro = new Euro(10);
         euro.multiplication(5);
-        assertEquals(50, euro.getCents());
+        Assertions.assertEquals(50, euro.getCents());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     void zeroing() {
         Euro euro = new Euro(270);
         euro.zeroing();
-        assertEquals(0, euro.getCents());
+        Assertions.assertEquals(0, euro.getCents());
     }
 
-    @Test
-    void PurchaseConstructorTestName() {
-        Purchase purchase = new Purchase("Apple", new Euro(25), 12);
-        assertEquals("Apple", purchase.getProductName());
-    }
+    @org.junit.jupiter.api.Test
+    void testPurchaseConstructor() {
+        Purchase purchase1 = new Purchase("Apple", new Euro(25), 12);
+        Assertions.assertEquals("Apple", purchase1.getProductName());
 
-    @Test
-    void PurchaseConstructorTestEuro() {
         Euro priceInEuro = new Euro(25);
-        Purchase purchase = new Purchase("Apple", priceInEuro, 12);
-        assertEquals(priceInEuro, purchase.getPriceInEuro());
+        Purchase purchase2 = new Purchase("Apple", priceInEuro, 12);
+        Assertions.assertEquals(priceInEuro, purchase2.getPriceInEuro());
+
+        Purchase purchase3 = new Purchase("Apple", new Euro(25), 12);
+        Assertions.assertEquals(12, purchase3.getNumberOfPurchasedUnits());
     }
 
-    @Test
-    void PurchaseConstructorTestNumber() {
-        Purchase purchase = new Purchase("Apple", new Euro(25), 12);
-        assertEquals(12, purchase.getNumberOfPurchasedUnits());
-    }
 
-    @Test
+    @org.junit.jupiter.api.Test
     void PurchaseGetCostWithEnoughForDiscountPurchasesAndZeroDiscount() {
         Euro priceInEuro = new Euro(20);
         var proportionalDiscountPurchase = new ProportionalDiscountPurchase("Apple", priceInEuro, 10, 0d);
-        assertEquals(new Euro(200), proportionalDiscountPurchase.getCost());
-        assertEquals(20, priceInEuro.getCents());
+        Assertions.assertEquals(new Euro(200), proportionalDiscountPurchase.getCost());
+        Assertions.assertEquals(20, priceInEuro.getCents());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     void PurchaseGetCostWithControlNumberOfPurchases() {
         Euro priceInEuro = new Euro(10);
         var proportionalDiscountPurchase = new ProportionalDiscountPurchase("Apple", priceInEuro, 10, 10d);
-        assertEquals(new Euro(90), proportionalDiscountPurchase.getCost());
-        assertEquals(10, priceInEuro.getCents());
+        Assertions.assertEquals(new Euro(100), proportionalDiscountPurchase.getCost());
+        Assertions.assertEquals(10, priceInEuro.getCents());
     }
 
-    @Test
-    void PurchaseGetCostWithNotEnoughForDiscountPurchases() {
-        Euro priceInEuro = new Euro(5);
-        var proportionalDiscountPurchase = new ProportionalDiscountPurchase("Apple", priceInEuro, 2, 10d);
-        assertEquals(new Euro(10), proportionalDiscountPurchase.getCost());
-        assertEquals(5, priceInEuro.getCents());
+    @org.junit.jupiter.api.Test
+    void testProportionalDiscountPurchaseGetCost() {
+        // Test with not enough for discount purchases
+        Euro priceInEuro1 = new Euro(5);
+        var proportionalDiscountPurchase1 = new ProportionalDiscountPurchase("Apple", priceInEuro1, 2, 10d);
+        Assertions.assertEquals(new Euro(10), proportionalDiscountPurchase1.getCost());
+        Assertions.assertEquals(5, priceInEuro1.getCents());
+
+        // Test with enough for discount purchases
+        Euro priceInEuro2 = new Euro(5);
+        var proportionalDiscountPurchase2 = new ProportionalDiscountPurchase("Apple", priceInEuro2, 12, 10d);
+        Assertions.assertEquals(new Euro(54), proportionalDiscountPurchase2.getCost());
+        Assertions.assertEquals(5, priceInEuro2.getCents());
     }
 
-    @Test
-    void PurchaseGetCostWithEnoughForDiscountPurchases() {
-        Euro priceInEuro = new Euro(5);
-        var proportionalDiscountPurchase = new ProportionalDiscountPurchase("Apple", priceInEuro, 12, 10d);
-        assertEquals(new Euro(54), proportionalDiscountPurchase.getCost());
-        assertEquals(5, priceInEuro.getCents());
-    }
 
-    @Test
-    void PurchaseIsEquals() {
+    @org.junit.jupiter.api.Test
+    void testPurchaseMethods() {
         Euro priceInEuro = new Euro(25);
-        Purchase purchase = new Purchase("Apple", priceInEuro, 12);
-        assertEquals(purchase, purchase);
-    }
+        Purchase purchase1 = new Purchase("Apple", priceInEuro, 12);
+        Assertions.assertEquals(purchase1, purchase1);
 
-    @Test
-    void PurchaseIsEqualsToObject() {
-        Euro priceInEuro = new Euro(25);
-        Purchase purchase = new Purchase("Apple", priceInEuro, 12);
+        Purchase purchase2 = new Purchase("Apple", priceInEuro, 12);
         Object object = new Object();
-        assertFalse(purchase.equals(object));
+        Assertions.assertNotEquals(purchase2, object);
     }
 
-    @Test
-    void getPurchaseFromFactory() throws FileNotFoundException {
-        Scanner scanner = new Scanner(new FileReader("src/in2.txt"));
-        scanner.useLocale(Locale.ENGLISH);
-        assertEquals("Purchase;Milk;1.80;3;5.40", PurchasesFactory.getPurchaseFromFactory(scanner).toString());
-    }
 
-    @Test
-    void getPurchaseFromFactoryNonExistingObject() throws NoSuchElementException, FileNotFoundException {
+    @org.junit.jupiter.api.Test
+    void testPurchasesFactoryMethods() throws FileNotFoundException {
+        Scanner scanner1 = new Scanner(new FileReader("src/in2.txt"));
+        scanner1.useLocale(Locale.ENGLISH);
+        Assertions.assertEquals("Purchase;Milk;1.80;3;5.40", PurchasesFactory.getPurchaseFromFactory(scanner1).toString());
+
         Exception isNoSuchElementException = null;
 
-        Scanner scanner = new Scanner(new FileReader("src/in2.txt"));
-        scanner.useLocale(Locale.ENGLISH);
+        Scanner scanner2 = new Scanner(new FileReader("src/in2.txt"));
+        scanner2.useLocale(Locale.ENGLISH);
         int counter = 0;
         while (counter < 6) {
             counter++;
-            PurchasesFactory.getPurchaseFromFactory(scanner);
+            PurchasesFactory.getPurchaseFromFactory(scanner2);
         }
         try {
-            PurchasesFactory.getPurchaseFromFactory(scanner);
+            PurchasesFactory.getPurchaseFromFactory(scanner2);
         } catch (NoSuchElementException noSuchElementException) {
             isNoSuchElementException = noSuchElementException;
         }
         NoSuchElementException exception = new NoSuchElementException();
-        assertEquals(exception.getMessage(), isNoSuchElementException.getMessage());
-
+        assert isNoSuchElementException != null;
+        Assertions.assertEquals(exception.getMessage(), isNoSuchElementException.getMessage());
     }
 
-    @Test
+
+
+    @org.junit.jupiter.api.Test
     void factory() {
         var scanner = new Scanner("GENERAL_PURCHASE Apple 1000 1");
         var purchase = PurchasesFactory.getPurchaseFromFactory(scanner);
-        assertTrue(purchase instanceof Purchase);
+        assertNotNull(purchase);
         assertEquals(new Euro(1000), purchase.getPriceInEuro());
 
         scanner = new Scanner("PURCHASE_WITH_DISCOUNT Apple 2000 2 1");

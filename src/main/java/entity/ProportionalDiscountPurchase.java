@@ -28,7 +28,7 @@ public class ProportionalDiscountPurchase extends Purchase {
         } else {
             euro = super.getCost();
         }
-        return euro;
+        return new Euro(RoundMethod.ROUND.round(euro.getCents(), RoundMethod.FLOOR, 0));
 
     }
 
